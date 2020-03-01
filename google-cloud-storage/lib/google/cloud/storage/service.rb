@@ -153,7 +153,7 @@ module Google
         # Creates a new bucket ACL.
         def insert_bucket_acl bucket_name, entity, role, user_project: nil
           new_acl = Google::Apis::StorageV1::BucketAccessControl.new(
-            { entity: entity, role: role }.delete_if { |_k, v| v.nil? }
+            entity: entity, role: role
           )
           execute do
             service.insert_bucket_access_control \
@@ -183,7 +183,7 @@ module Google
         # Creates a new default ACL.
         def insert_default_acl bucket_name, entity, role, user_project: nil
           new_acl = Google::Apis::StorageV1::ObjectAccessControl.new(
-            { entity: entity, role: role }.delete_if { |_k, v| v.nil? }
+            entity: entity, role: role
           )
           execute do
             service.insert_default_object_access_control \
