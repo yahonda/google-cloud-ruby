@@ -1766,7 +1766,7 @@ module Google
           # Sending nil metadata results in an Apiary runtime error:
           # NoMethodError: undefined method `each' for nil:NilClass
           attr_params.reject! { |k, v| k == :metadata && v.nil? }
-          Google::Apis::StorageV1::Object.new attr_params
+          Google::Apis::StorageV1::Object.new **attr_params
         end
 
         protected
@@ -1810,19 +1810,24 @@ module Google
                          user_project: nil
           new_bucket ||= bucket
           new_name ||= name
-          options = { acl: File::Acl.predefined_rule_for(acl),
+
+          resp = service.rewrite_file \
+            bucket, name, new_bucket, new_name, updated_gapi,
+                      acl: File::Acl.predefined_rule_for(acl),
                       generation: generation, source_key: encryption_key,
                       destination_key: new_encryption_key,
                       destination_kms_key: new_kms_key,
-                      user_project: user_project }.delete_if { |_k, v| v.nil? }
-
-          resp = service.rewrite_file \
-            bucket, name, new_bucket, new_name, updated_gapi, options
+                      user_project: user_project
           until resp.done
             sleep 1
-            retry_options = options.merge token: resp.rewrite_token
             resp = service.rewrite_file \
-              bucket, name, new_bucket, new_name, updated_gapi, retry_options
+              bucket, name, new_bucket, new_name, updated_gapi,
+                      acl: File::Acl.predefined_rule_for(acl),
+                      generation: generation, source_key: encryption_key,
+                      destination_key: new_encryption_key,
+                      destination_kms_key: new_kms_key,
+                      user_project: user_project,
+                      token: resp.rewrite_token
           end
           resp.resource
         end
