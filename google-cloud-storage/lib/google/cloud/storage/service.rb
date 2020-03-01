@@ -243,6 +243,7 @@ module Google
         def insert_notification bucket_name, topic_name, custom_attrs: nil,
                                 event_types: nil, prefix: nil, payload: nil,
                                 user_project: nil
+          #TODO
           new_notification = Google::Apis::StorageV1::Notification.new(
             { custom_attributes: custom_attrs,
               event_types: event_types(event_types),
