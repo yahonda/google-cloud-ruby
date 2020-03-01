@@ -435,7 +435,7 @@ module Google
         def insert_file_acl bucket_name, file_name, entity, role,
                             generation: nil, user_project: nil
           new_acl = Google::Apis::StorageV1::ObjectAccessControl.new(
-            { entity: entity, role: role }.delete_if { |_k, v| v.nil? }
+            entity: entity, role: role
           )
           execute do
             service.insert_object_access_control \
