@@ -357,6 +357,7 @@ module Google
                           logging_bucket: nil, logging_prefix: nil,
                           website_main: nil, website_404: nil, versioning: nil,
                           requester_pays: nil, user_project: nil
+          #TODO
           new_bucket = Google::Apis::StorageV1::Bucket.new({
             name: bucket_name,
             location: location
