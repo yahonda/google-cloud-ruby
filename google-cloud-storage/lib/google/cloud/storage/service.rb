@@ -299,6 +299,7 @@ module Google
                         storage_class: nil, key: nil, kms_key: nil,
                         temporary_hold: nil, event_based_hold: nil,
                         user_project: nil
+          #TODO
           file_obj = Google::Apis::StorageV1::Object.new(
             { cache_control: cache_control, content_type: content_type,
               content_disposition: content_disposition, md5_hash: md5,
