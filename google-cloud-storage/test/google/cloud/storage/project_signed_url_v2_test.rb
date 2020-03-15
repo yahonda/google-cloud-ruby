@@ -147,7 +147,7 @@ describe Google::Cloud::Storage::Project, :signed_url, :v2, :mock_storage do
         signed_url = storage.signed_url bucket_name, file_path
 
         signed_uri = URI signed_url
-        signed_uri.path.must_equal "/bucket/hello%20world.txt"
+        _(signed_uri.path).must_equal "/bucket/hello%20world.txt"
 
         signed_url_params = CGI::parse signed_uri.query
         signed_url_params["GoogleAccessId"].must_equal ["native_client_email"]

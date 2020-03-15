@@ -87,8 +87,8 @@ describe Google::Cloud do
           Google::Cloud::Storage::Credentials.stub :default, default_credentials do
             storage = Google::Cloud.storage
             storage.must_be_kind_of Google::Cloud::Storage::Project
-            storage.project.must_equal "project-id"
-            storage.service.credentials.must_equal default_credentials
+            _(storage.project).must_equal "project-id"
+            _(storage.service.credentials).must_equal default_credentials
           end
         end
       end
@@ -118,8 +118,8 @@ describe Google::Cloud do
               Google::Cloud::Storage::Service.stub :new, stubbed_service do
                 storage = Google::Cloud.storage "project-id", "path/to/keyfile.json"
                 storage.must_be_kind_of Google::Cloud::Storage::Project
-                storage.project.must_equal "project-id"
-                storage.service.must_be_kind_of OpenStruct
+                _(storage.project).must_equal "project-id"
+                _(storage.service).must_be_kind_of OpenStruct
               end
             end
           end
@@ -143,8 +143,8 @@ describe Google::Cloud do
         Google::Cloud::Storage::Service.stub :new, stubbed_service do
           storage = Google::Cloud::Storage.anonymous retries: 5, timeout: 60, endpoint: "storage-endpoint2.example.com"
           storage.must_be_kind_of Google::Cloud::Storage::Project
-          storage.project.must_be :nil?
-          storage.service.credentials.must_be :nil?
+          _(storage.project).must_be :nil?
+          _(storage.service.credentials).must_be :nil?
         end
       end
     end
@@ -168,8 +168,8 @@ describe Google::Cloud do
           Google::Cloud::Storage::Credentials.stub :default, default_credentials do
             storage = Google::Cloud::Storage.new
             storage.must_be_kind_of Google::Cloud::Storage::Project
-            storage.project.must_equal "project-id"
-            storage.service.credentials.must_equal default_credentials
+            _(storage.project).must_equal "project-id"
+            _(storage.service.credentials).must_equal default_credentials
           end
         end
       end
@@ -191,8 +191,8 @@ describe Google::Cloud do
           Google::Cloud::Storage::Service.stub :new, stubbed_service do
             storage = Google::Cloud::Storage.new credentials: default_credentials, endpoint: "storage-endpoint2.example.com"
             storage.must_be_kind_of Google::Cloud::Storage::Project
-            storage.project.must_equal "project-id"
-            storage.service.must_be_kind_of OpenStruct
+            _(storage.project).must_equal "project-id"
+            _(storage.service).must_be_kind_of OpenStruct
           end
         end
       end
@@ -222,8 +222,8 @@ describe Google::Cloud do
               Google::Cloud::Storage::Service.stub :new, stubbed_service do
                 storage = Google::Cloud::Storage.new project_id: "project-id", credentials: "path/to/keyfile.json"
                 storage.must_be_kind_of Google::Cloud::Storage::Project
-                storage.project.must_equal "project-id"
-                storage.service.must_be_kind_of OpenStruct
+                _(storage.project).must_equal "project-id"
+                _(storage.service).must_be_kind_of OpenStruct
               end
             end
           end
@@ -255,8 +255,8 @@ describe Google::Cloud do
               Google::Cloud::Storage::Service.stub :new, stubbed_service do
                 storage = Google::Cloud::Storage.new project: "project-id", keyfile: "path/to/keyfile.json"
                 storage.must_be_kind_of Google::Cloud::Storage::Project
-                storage.project.must_equal "project-id"
-                storage.service.must_be_kind_of OpenStruct
+                _(storage.project).must_equal "project-id"
+                _(storage.service).must_be_kind_of OpenStruct
               end
             end
           end
@@ -273,7 +273,7 @@ describe Google::Cloud do
       stubbed_service = ->(project, credentials, retries: nil, timeout: nil, host: nil) {
         project.must_equal "project-id"
         credentials.must_be_kind_of OpenStruct
-        credentials.project_id.must_equal "project-id"
+        _(credentials.project_id).must_equal "project-id"
         retries.must_be :nil?
         timeout.must_be :nil?
         # TODO: Remove once discovery document is updated.
@@ -291,8 +291,8 @@ describe Google::Cloud do
                 Google::Cloud::Storage::Service.stub :new, stubbed_service do
                   storage = Google::Cloud::Storage.new credentials: "path/to/keyfile.json"
                   storage.must_be_kind_of Google::Cloud::Storage::Project
-                  storage.project.must_equal "project-id"
-                  storage.service.must_be_kind_of OpenStruct
+                  _(storage.project).must_equal "project-id"
+                  _(storage.service).must_be_kind_of OpenStruct
                 end
               end
             end
@@ -339,8 +339,8 @@ describe Google::Cloud do
               Google::Cloud::Storage::Service.stub :new, stubbed_service do
                 storage = Google::Cloud::Storage.new
                 storage.must_be_kind_of Google::Cloud::Storage::Project
-                storage.project.must_equal "project-id"
-                storage.service.must_be_kind_of OpenStruct
+                _(storage.project).must_equal "project-id"
+                _(storage.service).must_be_kind_of OpenStruct
               end
             end
           end
@@ -378,8 +378,8 @@ describe Google::Cloud do
               Google::Cloud::Storage::Service.stub :new, stubbed_service do
                 storage = Google::Cloud::Storage.new
                 storage.must_be_kind_of Google::Cloud::Storage::Project
-                storage.project.must_equal "project-id"
-                storage.service.must_be_kind_of OpenStruct
+                _(storage.project).must_equal "project-id"
+                _(storage.service).must_be_kind_of OpenStruct
               end
             end
           end
@@ -419,8 +419,8 @@ describe Google::Cloud do
               Google::Cloud::Storage::Service.stub :new, stubbed_service do
                 storage = Google::Cloud::Storage.new
                 storage.must_be_kind_of Google::Cloud::Storage::Project
-                storage.project.must_equal "project-id"
-                storage.service.must_be_kind_of OpenStruct
+                _(storage.project).must_equal "project-id"
+                _(storage.service).must_be_kind_of OpenStruct
               end
             end
           end
@@ -458,8 +458,8 @@ describe Google::Cloud do
               Google::Cloud::Storage::Service.stub :new, stubbed_service do
                 storage = Google::Cloud::Storage.new
                 storage.must_be_kind_of Google::Cloud::Storage::Project
-                storage.project.must_equal "project-id"
-                storage.service.must_be_kind_of OpenStruct
+                _(storage.project).must_equal "project-id"
+                _(storage.service).must_be_kind_of OpenStruct
               end
             end
           end
@@ -499,8 +499,8 @@ describe Google::Cloud do
               Google::Cloud::Storage::Service.stub :new, stubbed_service do
                 storage = Google::Cloud::Storage.new
                 storage.must_be_kind_of Google::Cloud::Storage::Project
-                storage.project.must_equal "project-id"
-                storage.service.must_be_kind_of OpenStruct
+                _(storage.project).must_equal "project-id"
+                _(storage.service).must_be_kind_of OpenStruct
               end
             end
           end

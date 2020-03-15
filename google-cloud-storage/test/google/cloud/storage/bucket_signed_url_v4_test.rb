@@ -31,7 +31,7 @@ describe Google::Cloud::Storage::Bucket, :signed_url, :v4, :mock_storage do
       signed_url = bucket.signed_url version: :v4
 
       signed_uri = URI(signed_url)
-      signed_uri.path.must_equal "/bucket"
+      _(signed_uri.path).must_equal "/bucket"
       signed_url_params = CGI::parse(signed_uri.query)
       signed_url_params["X-Goog-Algorithm"].must_equal  ["GOOG4-RSA-SHA256"]
       signed_url_params["X-Goog-Credential"].must_equal  ["native_client_email/20120101/auto/storage/goog4_request"]

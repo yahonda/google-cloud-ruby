@@ -22,7 +22,7 @@ describe Google::Cloud::Storage::Project, :anonymous, :mock_storage do
   it "raises when creating a bucket without authentication" do
     stub = Object.new
     def stub.insert_bucket *args
-      args.first.must_be_nil # project
+      _(args.first).must_be_nil # project
       raise Google::Apis::AuthorizationError.new("unauthorized", status_code: 401)
     end
     anonymous_storage.service.mocked_service = stub
@@ -33,7 +33,7 @@ describe Google::Cloud::Storage::Project, :anonymous, :mock_storage do
   it "raises when listing buckets without authentication" do
     stub = Object.new
     def stub.list_buckets *args
-      args.first.must_be_nil # project
+      _(args.first).must_be_nil # project
       raise Google::Apis::AuthorizationError.new("unauthorized", status_code: 401)
     end
     anonymous_storage.service.mocked_service = stub
@@ -53,7 +53,7 @@ describe Google::Cloud::Storage::Project, :anonymous, :mock_storage do
 
     mock.verify
 
-    bucket.name.must_equal bucket_name
+    _(bucket.name).must_equal bucket_name
     bucket.wont_be :lazy?
   end
 
@@ -71,10 +71,10 @@ describe Google::Cloud::Storage::Project, :anonymous, :mock_storage do
 
     mock.verify
 
-    files.size.must_equal num_files
+    _(files.size).must_equal num_files
     files.each do |file|
       file.must_be_kind_of Google::Cloud::Storage::File
-      file.user_project.must_be :nil?
+      _(file.user_project).must_be :nil?
     end
   end
 
@@ -93,8 +93,8 @@ describe Google::Cloud::Storage::Project, :anonymous, :mock_storage do
 
     mock.verify
 
-    file.name.must_equal file_name
-    file.user_project.must_be :nil?
+    _(file.name).must_equal file_name
+    _(file.user_project).must_be :nil?
     file.wont_be :lazy?
   end
 
