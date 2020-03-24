@@ -9,7 +9,6 @@ AllCops:
     - "conformance/**/*"
     - "google-cloud-storage.gemspec"
     - "Rakefile"
-    - "test/**/*"
     - "support/**/*"
 
 Documentation:
