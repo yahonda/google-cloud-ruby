@@ -44,7 +44,7 @@ class SignerV4Test < MockStorage
         # sut
         signed_url = signer.signed_url **SignerV4Test.kwargs(test)
 
-        signed_url.must_equal test.expectedUrl
+        _(signed_url).must_equal test.expectedUrl
       end
     end
   end
@@ -56,7 +56,7 @@ class SignerV4Test < MockStorage
         # sut
         signed_url = storage.signed_url test.bucket, test.object, **SignerV4Test.kwargs(test).merge({version: :v4})
 
-        signed_url.must_equal test.expectedUrl
+        _(signed_url).must_equal test.expectedUrl
       end
     end
   end
@@ -70,7 +70,7 @@ class SignerV4Test < MockStorage
         # sut
         signed_url = bucket.signed_url test.object, **SignerV4Test.kwargs(test).merge({version: :v4})
 
-        signed_url.must_equal test.expectedUrl
+        _(signed_url).must_equal test.expectedUrl
       end
     end
   end
@@ -86,7 +86,7 @@ class SignerV4Test < MockStorage
         # sut
         signed_url = file.signed_url **SignerV4Test.kwargs(test).merge({version: :v4})
 
-        signed_url.must_equal test.expectedUrl
+        _(signed_url).must_equal test.expectedUrl
       end
     end
   end
